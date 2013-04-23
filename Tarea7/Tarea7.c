@@ -63,7 +63,7 @@ if(!p){
  slopey2=0.0;
 
 
- fileout= fopen("Datos.dat", "w");
+ fileout= fopen("Data.dat", "w");
  if(!fileout){
     printf("There is something wrong with datos.dat\n");
     exit(1);
@@ -72,8 +72,10 @@ if(!p){
  
  for(i=0; i<n_points; i++){
 
-   slopey1= runge_kutta_slope(h,t[i],y1[i],y2[i])[0];
-   slopey2= runge_kutta_slope(h,t[i],y1[i],y2[i])[1];
+     float *slopes;
+     slopes = runge_kutta_slope(h,t[i],y1[i],y2[i]);
+   slopey1= slopes[0];
+   slopey2= slopes[1];
    t[i+1] = t[i] + h;
    y1[i+1] = y1[i] + h*slopey1;
    y2[i+1] = y2[i] + h*slopey2;
